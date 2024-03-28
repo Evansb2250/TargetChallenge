@@ -66,6 +66,10 @@ dependencies {
   implementation("androidx.compose.material3:material3:1.2.1")
   implementation("androidx.compose.material3:material3")
 
+  //Needed to get the new splash screen API
+  //Splash Screen
+  implementation("androidx.core:core-splashscreen:1.0.1")
+
   // Compose Navigation
   def nav_version = "2.7.4"
   implementation("androidx.navigation:navigation-compose:$nav_version")
