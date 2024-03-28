@@ -11,14 +11,14 @@ sealed class LoginScreenStates {
     data class InProgress(
         private val initialUserName: String = "",
         private val initialPassword: String = "",
-        private val errorState: ErrorState = ErrorState(),
+        val errorState: ErrorState = ErrorState(),
     ): LoginScreenStates(){
         var userName by  mutableStateOf(initialUserName)
         var password by mutableStateOf(initialPassword)
     }
 
     data class Login(
-        val userId: String,
+        val userId: Int,
     ) : LoginScreenStates()
 }
 
