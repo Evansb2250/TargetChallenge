@@ -1,4 +1,4 @@
-package com.target.targetcasestudy.api
+package com.target.targetcasestudy.data.api
 
 import retrofit2.http.GET
 import retrofit2.http.Path

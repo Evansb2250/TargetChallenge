@@ -1,4 +1,4 @@
-package com.target.targetcasestudy.api
+package com.target.targetcasestudy.data.api
 
 data class Deal(
   val id: String,

@@ -1,4 +1,4 @@
-package com.target.targetcasestudy.api
+package com.target.targetcasestudy.data.api
 
 import io.reactivex.Single
 import retrofit2.http.GET
