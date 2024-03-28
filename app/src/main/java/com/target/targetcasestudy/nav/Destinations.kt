@@ -1,5 +1,9 @@
 package com.target.targetcasestudy.nav
 
+
+val userIdKey = "userId"
+val productIdKey = "productId"
+
 sealed class Destinations(
     val route: String
 ) {
@@ -11,18 +15,18 @@ sealed class Destinations(
         route = "SignUp"
     )
     object LandingPage : Destinations(
-        route = "LandingPage/{userId}"
+        route = "LandingPage/{$userIdKey}"
     )
 
     object Catalog : Destinations(
-        route = "Catalog/{userId}"
+        route = "Catalog/{$userIdKey}"
     )
 
     object ProductDetailRoute : Destinations(
-        route = "ProductDetailRoute/{userId}/{productId}"
+        route = "ProductDetailRoute/{$userIdKey}/{$productIdKey}"
     )
 
     object CartRoute: Destinations(
-        route = "CartRoute/{userId}"
+        route = "CartRoute/{$userIdKey}"
     )
 }

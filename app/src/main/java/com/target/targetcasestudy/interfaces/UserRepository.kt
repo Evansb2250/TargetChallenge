@@ -12,10 +12,12 @@ interface UserRepository {
     suspend fun createUser(
         userName: String,
         password: String,
-    )
+    ): AsyncResponse<String>
     suspend  fun deleteUser(
         userName: String,
     )
+
+    suspend fun authenticateUserId(userId: Int): AsyncResponse<String>
 
     suspend fun logout()
 

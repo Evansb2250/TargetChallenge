@@ -1,0 +1,32 @@
+package com.target.targetcasestudy.ui.screens.signup
+
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import com.target.targetcasestudy.core.ErrorState
+
+sealed class SignUpStates {
+    object Loading: SignUpStates()
+    data class Registering(
+        private val initialUserName: String = "",
+        private val initialPassword: String = "",
+        val errorState: ErrorState = ErrorState(),
+    ): SignUpStates(){
+        var userName by  mutableStateOf(initialUserName)
+        var password by mutableStateOf(initialPassword)
+        var passwordConfirmation by mutableStateOf(initialPassword)
+
+
+        fun readyToRegister():Boolean{
+            return try {
+                require(!userName.isEmpty())
+                require(!password.isEmpty() && password.equals(passwordConfirmation))
+                true
+            }catch (e:  IllegalArgumentException ){
+                false
+            }
+        }
+    }
+
+    object Registered : SignUpStates()
+}

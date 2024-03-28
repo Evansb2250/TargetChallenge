@@ -22,7 +22,7 @@ class UserRepostoryImpl @Inject constructor(
             AsyncResponse.Success(data = potentialUser)
         } else {
             val errorMessage =
-                if (userDao.userExist(userName) != null ) "Wrong Credentials" else "User doesn't exist"
+                if (userDao.userExist(userName) != null) "Wrong Credentials" else "User doesn't exist"
 
             AsyncResponse.Failed(
                 message = errorMessage
@@ -33,14 +33,32 @@ class UserRepostoryImpl @Inject constructor(
     override suspend fun createUser(
         userName: String,
         password: String,
-    ) {
-        TODO("Not yet implemented")
+    ): AsyncResponse<String> {
+        return if (userDao.userExist(userName) == null) {
+            userDao.insertUser(
+                user = UserEntity(
+                    userName = userName,
+                    password = password,
+                )
+            )
+            AsyncResponse.Success("User created!!")
+        } else {
+            AsyncResponse.Failed("User already exist!!")
+        }
     }
 
     override suspend fun deleteUser(
         userName: String,
     ) {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun authenticateUserId(userId: Int): AsyncResponse<String> {
+        return if (userDao.retrieveUser(userId) != null) {
+            AsyncResponse.Success(data = "$userId")
+        } else {
+            AsyncResponse.Failed(message = "User doesn't exist")
+        }
     }
 
     override suspend fun logout() {
