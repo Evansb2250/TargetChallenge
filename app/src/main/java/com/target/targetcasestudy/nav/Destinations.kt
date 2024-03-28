@@ -7,6 +7,9 @@ sealed class Destinations(
         route = "Login",
     )
 
+    object SignUp: Destinations(
+        route = "SignUp"
+    )
     object LandingPage : Destinations(
         route = "LandingPage/{userId}"
     )
