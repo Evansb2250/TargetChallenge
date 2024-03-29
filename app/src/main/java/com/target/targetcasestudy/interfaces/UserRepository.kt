@@ -14,10 +14,12 @@ interface UserRepository {
         password: String,
     ): AsyncResponse<String>
     suspend  fun deleteUser(
-        userName: String,
+        userId: String,
     )
 
-    suspend fun authenticateUserId(userId: Int): AsyncResponse<String>
+    suspend fun authenticateUserId(userId: Int): AsyncResponse<UserEntity?>
+
+    suspend fun getCurrentUserId(): AsyncResponse<UserEntity?>
 
     suspend fun logout()
 

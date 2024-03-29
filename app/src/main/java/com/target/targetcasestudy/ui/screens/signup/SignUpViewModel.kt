@@ -3,7 +3,7 @@ package com.target.targetcasestudy.ui.screens.signup
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.target.targetcasestudy.core.AsyncResponse
-import com.target.targetcasestudy.core.ErrorState
+import com.target.targetcasestudy.core.domain.ErrorState
 import com.target.targetcasestudy.interfaces.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -2,6 +2,7 @@ package com.target.targetcasestudy.ui.screens.login
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 
@@ -13,8 +14,12 @@ fun LoginScreen(
 ) {
     DisposableEffect(key1 = Unit) {
         onDispose {
-            vm.reset()
+            vm.resetState()
         }
+    }
+
+    LaunchedEffect(key1 = Unit){
+        vm.loadCredentials()
     }
 
     LoginContent(
@@ -22,6 +27,6 @@ fun LoginScreen(
         navigateToSignUpScreen = navigateToSignUpScreen,
         navigateToLandingPage = navigateToLandingPage,
         signIn = vm::signIn,
-        retry = vm::reset
+        retry = vm::resetState
     )
 }

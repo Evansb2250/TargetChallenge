@@ -2,9 +2,8 @@ package com.target.targetcasestudy.ui.screens.login
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.target.targetcasestudy.core.ErrorState
+import com.target.targetcasestudy.core.domain.ErrorState
 
 sealed class LoginScreenStates {
     object Loading: LoginScreenStates()

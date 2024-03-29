@@ -1,6 +1,7 @@
 package com.target.targetcasestudy.di
 
 import android.content.Context
+import androidx.room.Room
 import com.target.targetcasestudy.data.room.database.TargetDatabase
 import dagger.Module
 import dagger.Provides
@@ -17,7 +18,12 @@ class DatabaseModule {
     @Provides
     fun providesTargetDatabase(
         @ApplicationContext context: Context,
-    ): TargetDatabase = TargetDatabase.getDatabase(context)
+    ): TargetDatabase = Room.databaseBuilder(
+        context,
+        TargetDatabase::class.java,
+        "TargetDatabase"
+    ).fallbackToDestructiveMigration()
+        .build()
 
 
 }

@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.target.targetcasestudy.ui.screens.catalog.CatalogScreen
+import com.target.targetcasestudy.ui.screens.details.DealsDetailScreen
 import com.target.targetcasestudy.ui.screens.landing.LandingScreen
 import com.target.targetcasestudy.ui.screens.login.LoginScreen
 import com.target.targetcasestudy.ui.screens.signup.SignUpScreen
@@ -24,7 +26,10 @@ fun TargetNavHost() {
             LoginScreen(
                 navigateToLandingPage = { userId ->
                     navController.navigate(
-                        route = Destinations.LandingPage.route.replace("{$userIdKey}", userId)
+                        route = addUserIdToDestination(
+                            Destinations.LandingPage,
+                            userId
+                        )
                     )
                 },
                 navigateToSignUpScreen = {
@@ -58,32 +63,67 @@ fun TargetNavHost() {
                         route = Destinations.Login.route
                     )
                 },
-                navigateToCartScreen = {
+                navigateToCartScreen = { userId ->
                     navController.navigate(
-                        route = Destinations.CartRoute.route
+                        route = addUserIdToDestination(
+                            destinations = Destinations.CartRoute,
+                            userId = userId,
+                        )
                     )
                 },
-                navigateToCatalogScreen = {
+                navigateToCatalogScreen = { userId ->
                     navController.navigate(
-                        route = Destinations.Catalog.route
+                        route = addUserIdToDestination(
+                            destinations = Destinations.Catalog,
+                            userId = userId
+                        ),
                     )
                 },
             )
         }
+
         composable(
             route = Destinations.Catalog.route,
         ) {
-            Text("Catalog")
+            val userId = it.arguments?.getString(userIdKey) ?: return@composable
+            CatalogScreen(
+                userId = userId,
+                navigateToDetailsPage = { userId, dealId ->
+                    navController.navigate(
+                        route = Destinations.ProductDetailRoute.route.replace(
+                            "{$userIdKey}",
+                            userId
+                        ).replace(
+                            "{$productIdKey}",
+                            dealId,
+                        )
+                    )
+                }
+            )
         }
+
         composable(
             route = Destinations.ProductDetailRoute.route,
         ) {
 
+            val userId = it.arguments?.getString(userIdKey) ?: return@composable
+            val productId = it.arguments?.getString(productIdKey) ?: return@composable
+
+            DealsDetailScreen(userId = userId, dealId = productId)
+
         }
+
         composable(
             route = Destinations.CartRoute.route,
         ) {
             Text("Cart")
         }
     }
+}
+
+private fun addUserIdToDestination(
+    destinations: Destinations,
+    userId: String,
+): String {
+    return destinations.route.replace("{$userIdKey}", userId)
 }

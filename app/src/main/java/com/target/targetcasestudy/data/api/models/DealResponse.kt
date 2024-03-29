@@ -1,4 +1,4 @@
-package com.target.targetcasestudy.data.api
+package com.target.targetcasestudy.data.api.models
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -6,5 +6,5 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class DealResponse(
   @Json(name = "products")
-  val deals: List<Deal>
+  val deals: List<DealDto>
 )

@@ -24,6 +24,8 @@ fun LandingScreen(
         navigateToCart = navigateToCartScreen,
         navigateToCatalog = navigateToCatalogScreen,
         navigateToLoginScreen = navigateToLoginScreen,
+        logout = vm::logout,
+        deleteAccount = vm::deleteUser
     )
 }
 
