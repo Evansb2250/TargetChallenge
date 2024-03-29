@@ -20,5 +20,8 @@ fun DealsDetailScreen(
 
     val state = viewModel.state.collectAsState().value
 
-    DealsDetailContent(state = state)
+    DealsDetailContent(
+        state = state,
+        addToCart = viewModel::addToCart,
+    )
 }
