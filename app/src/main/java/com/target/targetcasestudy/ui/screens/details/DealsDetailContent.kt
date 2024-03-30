@@ -97,16 +97,36 @@ fun DealsDetailContent(
 @Composable
 fun DealDetailsCard(
     deal: DealDetails,
-    addToCart: (deal: DealDetails) ->
-    Column(
-        modifier = Modifier.verticalScroll(scrollState),
-        horizontalAlignment = Alignment.CenterHo
-                .
-            regularPrice = dea
+    addToCart: (deal: DealDetails) ->  Unit = {},
+){
+    val scrollState = rememberScrollState()
+    Column {
+        Box(
+            modifier = Modifier
+                .size(343.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .background(
+                    color = Color.Red,
+                    shape = RoundedCornerShape(8.dp)
+                )
+        ) {
+            AsyncImage(
+                model = deal.imageUrl,
+                contentDescription = "Product image of a ${deal.title} in catalog"
+            )
+        }
 
         Text(
-            text = deal.description
+            text = deal.title
         )
+
+        PriceCard(
+            regularPrice = ,
+            specialPrice = ,
+            fulfillment = ,)
+
+
+
 
         Box(
             contentAlignment = Alignment.BottomCenter
@@ -118,4 +138,26 @@ fun DealDetailsCard(
             }
         }
     }
+
 }
+
+//Column(
+//        modifier = Modifier.verticalScroll(scrollState),
+//        horizontalAlignment = Alignment.CenterHo
+//                .
+//            regularPrice = dea
+//
+//        Text(
+//            text = deal.description
+//        )
+//
+//        Box(
+//            contentAlignment = Alignment.BottomCenter
+//        ) {
+//            Button(
+//                onClick = { addToCart(deal) }
+//            ) {
+//                Text(text = "Add to cart")
+//            }
+//        }
+//    }
