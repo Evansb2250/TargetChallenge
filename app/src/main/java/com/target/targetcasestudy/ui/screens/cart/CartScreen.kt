@@ -8,7 +8,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @Composable
 fun CartScreen(
     userId: String,
-    viewModel: CartViewModel = hiltViewModel()
+    viewModel: CartViewModel = hiltViewModel(),
+    navigateToLandingScreen: () -> Unit = {},
 ) {
 
     LaunchedEffect(key1 = Unit){
@@ -19,6 +20,7 @@ fun CartScreen(
 
     CartScreenContent(
         state = viewModel.state.collectAsState().value,
-        deleteCartItem = viewModel::deletCartItem
+        deleteCartItem = viewModel::deletCartItem,
+        navigateBack = navigateToLandingScreen
     )
 }

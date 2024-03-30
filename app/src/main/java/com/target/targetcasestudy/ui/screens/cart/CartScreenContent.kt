@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -53,6 +54,7 @@ import com.target.targetcasestudy.ui.screens.cart.domain.CartItem
 fun CartScreenContent(
     state: CartScreenStates,
     deleteCartItem: (CartItem) -> Unit = {},
+    navigateBack: () -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -65,6 +67,16 @@ fun CartScreenContent(
                         text = "Cart"
                     )
                 },
+                navigationIcon = {
+                    IconButton(
+                        onClick = navigateBack,
+                    ) {
+                        Image(
+                            painter = painterResource(R.drawable.back_arrow),
+                            contentDescription = ""
+                        )
+                    }
+                }
             )
         }
     ) { paddingValues ->

@@ -126,7 +126,10 @@ fun TargetNavHost() {
         ) {
             val userId = it.arguments?.getString(userIdKey) ?: return@composable
             CartScreen(
-                userId = userId
+                userId = userId,
+                navigateToLandingScreen = {
+                    navController.popBackStack()
+                }
             )
         }
     }

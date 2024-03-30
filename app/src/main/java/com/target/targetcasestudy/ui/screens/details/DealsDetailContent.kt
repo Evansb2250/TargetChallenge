@@ -1,5 +1,6 @@
 package com.target.targetcasestudy.ui.screens.details
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -18,6 +19,9 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,6 +36,9 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import com.example.chooseu.ui.ui_components.dialog.ErrorDialog
 import com.example.chooseu.ui.ui_components.dialog.LoadingDialog
 import com.target.targetcasestudy.R
@@ -112,6 +119,18 @@ private fun DealDetailsCard(
     deal: DealDetails,
     addToCart: (deal: DealDetails) -> Unit = {},
 ) {
+    var showToastMessage by remember {
+        mutableStateOf(false)
+    }
+
+    val context = LocalContext.current
+
+    LaunchedEffect(key1 = showToastMessage) {
+        if (showToastMessage) {
+            Toast.makeText(context, "Added to Cart !!", Toast.LENGTH_SHORT).show()
+            showToastMessage = false
+        }
+    }
 
     Column {
         LazyColumn(
@@ -189,7 +208,7 @@ private fun DealDetailsCard(
                         fontFamily = RebotoFontFamily,
                         fontWeight = FontWeight.Normal,
                         text = buildAnnotatedString {
-                            withStyle(style = ParagraphStyle(lineHeight = 20.sp)){
+                            withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
                                 append(deal.description)
                             }
                         },
@@ -200,7 +219,6 @@ private fun DealDetailsCard(
             }
 
         }
-
 
         Box(
             modifier = Modifier
@@ -213,8 +231,13 @@ private fun DealDetailsCard(
                 modifier = Modifier
                     .height(44.dp)
                     .fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(containerColor = primaryColor),
-                onClick = { addToCart(deal) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = primaryColor,
+                ),
+                onClick = {
+                    showToastMessage = true
+                    addToCart(deal)
+                },
                 shape = RoundedCornerShape(dpValue4),
             ) {
                 Text(
