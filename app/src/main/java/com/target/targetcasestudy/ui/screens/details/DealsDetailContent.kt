@@ -153,16 +153,25 @@ fun DealDetailsCard(
         )
 
         Text(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .padding(vertical = 16.dp)
+                .fillMaxWidth(),
             fontSize = TextUnit(16f, TextUnitType.Sp),
             fontFamily = RebotoFontFamily,
             fontWeight = FontWeight.Normal,
             text = deal.description,
-            )
+            color = Color(0XFF888888)
+        )
 
         Box(
-            modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.BottomCenter
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    Color(0XFFCC0000),
+                    shape = RoundedCornerShape(4.dp)
+                    )
+                ,
+            contentAlignment = Alignment.BottomCenter,
         ) {
             Button(
                 onClick = { addToCart(deal) }
