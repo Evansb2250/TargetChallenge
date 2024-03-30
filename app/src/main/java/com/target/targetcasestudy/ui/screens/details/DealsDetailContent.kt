@@ -65,7 +65,7 @@ fun DealsDetailContent(
                         fontFamily = RebotoFontFamily,
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFF333333),
-                        text = "Product List"
+                        text = "Details"
                     )
                 },
             )
@@ -102,11 +102,13 @@ fun DealDetailsCard(
 ) {
     val scrollState = rememberScrollState()
     Column(
-        modifier = Modifier.verticalScroll(scrollState)
+        modifier = Modifier
+            .padding(8.dp)
+            .verticalScroll(scrollState)
     ) {
         Box(
             modifier = Modifier
-                .size(343.dp)
+                .size(328.dp)
                 .clip(RoundedCornerShape(8.dp))
                 .background(
                     color = Color.Red,
