@@ -33,6 +33,10 @@ import com.example.chooseu.ui.ui_components.dialog.ErrorDialog
 import com.example.chooseu.ui.ui_components.dialog.LoadingDialog
 import com.target.targetcasestudy.R
 import com.target.targetcasestudy.theme.RebotoFontFamily
+import com.target.targetcasestudy.theme.dpValue12
+import com.target.targetcasestudy.theme.dpValue16
+import com.target.targetcasestudy.theme.dpValue4
+import com.target.targetcasestudy.theme.dpValue8
 import com.target.targetcasestudy.ui.components.generic.ErrorScreen
 import com.target.targetcasestudy.ui.components.toolbar.TargetToolBar
 import com.target.targetcasestudy.ui.screens.catalog.domain.Deal
@@ -48,7 +52,7 @@ fun CatalogContent(
             TargetToolBar(
                 title = {
                     Text(
-                        modifier = Modifier.padding(horizontal = 4.dp),
+                        modifier = Modifier.padding(horizontal = dpValue4),
                         fontSize = TextUnit(18f, TextUnitType.Sp),
                         fontFamily = RebotoFontFamily,
                         fontWeight = FontWeight.Bold,
@@ -114,7 +118,7 @@ fun DealCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(
-                all = 16.dp,
+                all = dpValue16,
             )
             .clickable {
                 onClick(deal.id.toString())
@@ -123,10 +127,10 @@ fun DealCard(
         Box(
             modifier = Modifier
                 .size(140.dp)
-                .clip(RoundedCornerShape(8.dp))
+                .clip(RoundedCornerShape(dpValue8))
                 .background(
-                    color = Color.Red,
-                    shape = RoundedCornerShape(8.dp)
+                    color = Color.Gray,
+                    shape = RoundedCornerShape(dpValue8)
                 )
         ) {
             AsyncImage(
@@ -151,8 +155,8 @@ fun DealCard(
                 fontWeight = FontWeight.Normal,
                 modifier = Modifier
                     .padding(
-                        vertical = 16.dp,
-                        horizontal = 12.dp,
+                        vertical = dpValue16,
+                        horizontal = dpValue12,
                     )
                     .weight(1f, fill = true)
                     .fillMaxWidth(),
@@ -161,12 +165,12 @@ fun DealCard(
 
             Row(
                 modifier = Modifier.padding(
-                    horizontal = 8.dp,
+                    horizontal = dpValue8,
                 )
             ) {
                 Text(
                     modifier = Modifier.padding(
-                        horizontal = 4.dp,
+                        horizontal = dpValue4,
                     ),
                     fontSize = TextUnit(12f, TextUnitType.Sp),
                     fontFamily = RebotoFontFamily,
@@ -201,13 +205,13 @@ fun PriceCard(
         Row(
             modifier = Modifier
                 .padding(
-                    horizontal = 8.dp,
+                    horizontal = dpValue8,
                 )
                 .fillMaxWidth(),
         ) {
             //Price
             Text(
-                modifier = Modifier.padding(horizontal = 4.dp),
+                modifier = Modifier.padding(horizontal = dpValue4),
                 fontSize = TextUnit(21f, TextUnitType.Sp),
                 fontFamily = RebotoFontFamily,
                 fontWeight = FontWeight.Bold,
@@ -224,7 +228,7 @@ fun PriceCard(
         }
         Text(
             fontSize = TextUnit(14f, TextUnitType.Sp),
-            modifier = Modifier.padding(horizontal = 12.dp),
+            modifier = Modifier.padding(horizontal = dpValue12),
             fontFamily = RebotoFontFamily,
             fontWeight = FontWeight.Normal,
             color = Color(0xFF666666),

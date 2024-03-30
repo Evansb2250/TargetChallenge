@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.target.targetcasestudy.R
+import com.target.targetcasestudy.theme.dpValue16
 
 @Composable
 fun CartIconButton(
@@ -20,7 +21,7 @@ fun CartIconButton(
 ) {
     BadgedBox(
         modifier = Modifier.padding(
-            horizontal = 16.dp
+            horizontal = dpValue16
         ),
         badge = {
             Badge(

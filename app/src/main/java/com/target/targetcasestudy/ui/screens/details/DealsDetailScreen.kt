@@ -15,7 +15,7 @@ fun DealsDetailScreen(
 ) {
     //Override BackHandler
     BackHandler {
-
+        navigateBack()
     }
 
     LaunchedEffect(key1 = Unit) {

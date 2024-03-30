@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.target.targetcasestudy.R
 import com.target.targetcasestudy.theme.RebotoFontFamily
+import com.target.targetcasestudy.theme.dpValue16
 
 @Composable
 fun ErrorScreen() {
@@ -34,7 +35,7 @@ fun ErrorScreen() {
         )
 
         Text(
-            modifier = Modifier.padding(vertical = 16.dp),
+            modifier = Modifier.padding(vertical = dpValue16),
             fontSize = TextUnit(24f, TextUnitType.Sp),
             fontFamily = RebotoFontFamily,
             fontWeight = FontWeight.Bold,

@@ -1,25 +1,19 @@
 package com.target.targetcasestudy.ui.screens.details
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -42,6 +36,11 @@ import com.example.chooseu.ui.ui_components.dialog.ErrorDialog
 import com.example.chooseu.ui.ui_components.dialog.LoadingDialog
 import com.target.targetcasestudy.R
 import com.target.targetcasestudy.theme.RebotoFontFamily
+import com.target.targetcasestudy.theme.dpValue12
+import com.target.targetcasestudy.theme.dpValue16
+import com.target.targetcasestudy.theme.dpValue4
+import com.target.targetcasestudy.theme.dpValue8
+import com.target.targetcasestudy.theme.primaryColor
 import com.target.targetcasestudy.ui.components.generic.ErrorScreen
 import com.target.targetcasestudy.ui.components.toolbar.TargetToolBar
 import com.target.targetcasestudy.ui.screens.catalog.PriceCard
@@ -69,7 +68,7 @@ fun DealsDetailContent(
                 },
                 title = {
                     Text(
-                        modifier = Modifier.padding(horizontal = 4.dp),
+                        modifier = Modifier.padding(horizontal = dpValue4),
                         fontSize = TextUnit(18f, TextUnitType.Sp),
                         fontFamily = RebotoFontFamily,
                         fontWeight = FontWeight.Bold,
@@ -108,10 +107,8 @@ fun DealsDetailContent(
     }
 }
 
-
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun DealDetailsCard(
+private fun DealDetailsCard(
     deal: DealDetails,
     addToCart: (deal: DealDetails) -> Unit = {},
 ) {
@@ -126,27 +123,27 @@ fun DealDetailsCard(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp),
+                        .padding(dpValue8),
                     contentAlignment = Alignment.Center,
                 ) {
                     AsyncImage(
                         modifier = Modifier
-                            .padding(top = 8.dp)
-                            .clip(RoundedCornerShape(8.dp))
+                            .padding(top = dpValue8)
+                            .clip(RoundedCornerShape(dpValue8))
                             .size(328.dp),
                         model = deal.imageUrl,
                         contentDescription = "Product image of a ${deal.title} in catalog"
                     )
                 }
                 Text(
-                    modifier = Modifier.padding(12.dp),
+                    modifier = Modifier.padding(dpValue12),
                     fontSize = TextUnit(18f, TextUnitType.Sp),
                     fontFamily = RebotoFontFamily,
                     fontWeight = FontWeight.Normal,
                     text = deal.title
                 )
                 PriceCard(
-                    modifier = Modifier.padding(vertical = 16.dp),
+                    modifier = Modifier.padding(vertical = dpValue16),
                     regularPrice = deal.regularPrice.displayString,
                     specialPrice = deal.salePrice?.displayString,
                     fulfillment = deal.fulfillment,
@@ -162,7 +159,7 @@ fun DealDetailsCard(
                         .background(
                             color = Color(0xFFF3F3F3)
                         )
-                        .height(16.dp)
+                        .height(dpValue16)
                         .fillMaxWidth()
                 )
 
@@ -171,12 +168,12 @@ fun DealDetailsCard(
             item {
                 Column(
                     modifier = Modifier.padding(
-                        horizontal = 12.dp,
+                        horizontal = dpValue12,
                     )
                 ) {
 
                     Text(
-                        modifier = Modifier.padding(vertical = 16.dp),
+                        modifier = Modifier.padding(vertical = dpValue16),
                         fontSize = TextUnit(18f, TextUnitType.Sp),
                         fontFamily = RebotoFontFamily,
                         fontWeight = FontWeight.Bold,
@@ -186,7 +183,7 @@ fun DealDetailsCard(
 
                     Text(
                         modifier = Modifier
-                            .padding(vertical = 16.dp)
+                            .padding(vertical = dpValue16)
                             .fillMaxWidth(),
                         fontSize = TextUnit(16f, TextUnitType.Sp),
                         fontFamily = RebotoFontFamily,
@@ -208,7 +205,7 @@ fun DealDetailsCard(
         Box(
             modifier = Modifier
                 .weight(1f)
-                .padding(all = 16.dp)
+                .padding(all = dpValue16)
                 .fillMaxWidth(),
             contentAlignment = Alignment.TopCenter,
         ) {
@@ -218,7 +215,7 @@ fun DealDetailsCard(
                     .fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = primaryColor),
                 onClick = { addToCart(deal) },
-                shape = RoundedCornerShape(4.dp),
+                shape = RoundedCornerShape(dpValue4),
             ) {
                 Text(
                     text = "Add to cart"
@@ -230,4 +227,3 @@ fun DealDetailsCard(
 
 }
 
-val primaryColor = Color(0XFFCC0000)
