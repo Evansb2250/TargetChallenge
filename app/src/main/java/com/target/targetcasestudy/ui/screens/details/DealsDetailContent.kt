@@ -6,6 +6,7 @@ import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -81,7 +82,7 @@ fun DealsDetailContent(
                     ErrorDialog(
                         title = "Couldn't Find Deal",
                         error = state.errorState.errorMessage,
-                        )
+                    )
                 } else {
                     DealDetailsCard(
                         deal = state.deal,
@@ -97,10 +98,12 @@ fun DealsDetailContent(
 @Composable
 fun DealDetailsCard(
     deal: DealDetails,
-    addToCart: (deal: DealDetails) ->  Unit = {},
-){
+    addToCart: (deal: DealDetails) -> Unit = {},
+) {
     val scrollState = rememberScrollState()
-    Column {
+    Column(
+        modifier = Modifier.verticalScroll(scrollState)
+    ) {
         Box(
             modifier = Modifier
                 .size(343.dp)
@@ -111,6 +114,7 @@ fun DealDetailsCard(
                 )
         ) {
             AsyncImage(
+                modifier = Modifier.fillMaxSize(),
                 model = deal.imageUrl,
                 contentDescription = "Product image of a ${deal.title} in catalog"
             )
@@ -121,14 +125,27 @@ fun DealDetailsCard(
         )
 
         PriceCard(
-            regularPrice = ,
-            specialPrice = ,
-            fulfillment = ,)
+            regularPrice = deal.regularPrice.displayString,
+            specialPrice = deal.salePrice?.displayString,
+            fulfillment = deal.fulfillment,
+        )
 
 
+        Spacer(
+            modifier = Modifier
+                .background(
+                    color = Color(0XFF888888)
+                )
+                .height(12.dp)
+                .fillMaxWidth()
+        )
 
+        Text(text = "Product Details")
+
+        Text(text = deal.description)
 
         Box(
+            modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.BottomCenter
         ) {
             Button(
@@ -141,23 +158,3 @@ fun DealDetailsCard(
 
 }
 
-//Column(
-//        modifier = Modifier.verticalScroll(scrollState),
-//        horizontalAlignment = Alignment.CenterHo
-//                .
-//            regularPrice = dea
-//
-//        Text(
-//            text = deal.description
-//        )
-//
-//        Box(
-//            contentAlignment = Alignment.BottomCenter
-//        ) {
-//            Button(
-//                onClick = { addToCart(deal) }
-//            ) {
-//                Text(text = "Add to cart")
-//            }
-//        }
-//    }
