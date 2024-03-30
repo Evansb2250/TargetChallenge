@@ -102,88 +102,87 @@ fun DealDetailsCard(
     addToCart: (deal: DealDetails) -> Unit = {},
 ) {
     val scrollState = rememberScrollState()
-    Column(
-        modifier = Modifier
-            .padding(8.dp)
-            .verticalScroll(scrollState)
-    ) {
-        Box(
+
+        Column(
             modifier = Modifier
-                .size(328.dp)
-                .clip(RoundedCornerShape(8.dp))
-                .background(
-                    color = Color.Red,
-                    shape = RoundedCornerShape(8.dp)
-                )
+                .padding(8.dp)
+                .verticalScroll(scrollState)
         ) {
-            AsyncImage(
-                modifier = Modifier.fillMaxSize(),
-                model = deal.imageUrl,
-                contentDescription = "Product image of a ${deal.title} in catalog"
-            )
-        }
-
-        Text(
-            fontSize = TextUnit(18f, TextUnitType.Sp),
-            fontFamily = RebotoFontFamily,
-            fontWeight = FontWeight.Normal,
-            text = deal.title
-        )
-
-        PriceCard(
-            regularPrice = deal.regularPrice.displayString,
-            specialPrice = deal.salePrice?.displayString,
-            fulfillment = deal.fulfillment,
-        )
-
-
-        Spacer(
-            modifier = Modifier
-                .background(
-                    color = Color(0XFF888888)
+            Box(
+                modifier = Modifier
+                    .size(328.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(
+                        color = Color.Red,
+                        shape = RoundedCornerShape(8.dp)
+                    )
+            ) {
+                AsyncImage(
+                    modifier = Modifier.fillMaxSize(),
+                    model = deal.imageUrl,
+                    contentDescription = "Product image of a ${deal.title} in catalog"
                 )
-                .height(12.dp)
-                .fillMaxWidth()
-        )
+            }
 
-        Text(
-            fontSize = TextUnit(18f, TextUnitType.Sp),
-            fontFamily = RebotoFontFamily,
-            fontWeight = FontWeight.Bold,
-            text = "Product Details",
-        )
+            Text(
+                fontSize = TextUnit(18f, TextUnitType.Sp),
+                fontFamily = RebotoFontFamily,
+                fontWeight = FontWeight.Normal,
+                text = deal.title
+            )
 
-        Text(
-            modifier = Modifier
-                .padding(vertical = 16.dp)
-                .fillMaxWidth(),
-            fontSize = TextUnit(16f, TextUnitType.Sp),
-            fontFamily = RebotoFontFamily,
-            fontWeight = FontWeight.Normal,
-            text = deal.description,
-            color = Color(0XFF888888)
-        )
+            PriceCard(
+                regularPrice = deal.regularPrice.displayString,
+                specialPrice = deal.salePrice?.displayString,
+                fulfillment = deal.fulfillment,
+            )
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    primaryColor,
-                    shape = RoundedCornerShape(4.dp)
+
+            Spacer(
+                modifier = Modifier
+                    .background(
+                        color = Color(0XFF888888)
+                    )
+                    .height(12.dp)
+                    .fillMaxWidth()
+            )
+
+            Text(
+                fontSize = TextUnit(18f, TextUnitType.Sp),
+                fontFamily = RebotoFontFamily,
+                fontWeight = FontWeight.Bold,
+                text = "Product Details",
+            )
+
+            Text(
+                modifier = Modifier
+                    .padding(vertical = 16.dp)
+                    .fillMaxWidth(),
+                fontSize = TextUnit(16f, TextUnitType.Sp),
+                fontFamily = RebotoFontFamily,
+                fontWeight = FontWeight.Normal,
+                text = deal.description,
+                color = Color(0XFF888888)
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        primaryColor,
+                        shape = RoundedCornerShape(4.dp)
                     )
                 ,
-            contentAlignment = Alignment.BottomCenter,
-        ) {
-            Button(
-                colors = ButtonDefaults.buttonColors(containerColor =  primaryColor) ,
-                onClick = { addToCart(deal) }
+                contentAlignment = Alignment.TopCenter,
             ) {
-                Text(
-                    text = "Add to cart")
+                Button(
+                    colors = ButtonDefaults.buttonColors(containerColor =  primaryColor) ,
+                    onClick = { addToCart(deal) }
+                ) {
+                    Text(
+                        text = "Add to cart")
+                }
             }
         }
-    }
-
 }
 
 val primaryColor =  Color(0XFFCC0000)
