@@ -20,7 +20,6 @@ fun TargetNavHost() {
     val navController = rememberNavController()
 
     NavHost(
-        modifier = Modifier.background(color = Color(0xFFCC0000)),
         navController = navController,
         startDestination = Destinations.Login.route
     ) {

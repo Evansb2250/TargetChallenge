@@ -22,19 +22,25 @@ fun TargetToolBar(
     navigationIcon: @Composable () -> Unit = {},
     title: @Composable () -> Unit = {},
     actionIcon: @Composable () -> Unit = {},
+    color: Color = Color.White
 ) {
     TopAppBar(
         modifier = Modifier
             .border(
-                BorderStroke(1.dp, Color(0xFFE0E0E0)), // Change the border stroke color and width
+                BorderStroke(
+                    1.dp,
+                    color = if (color == Color.White) Color(borderColor) else color
+                ), // Change the border stroke color and width
                 shape = RectangleShape // adds border only to the bottom part
             ),
         navigationIcon = { navigationIcon.invoke() },
         title = { title.invoke() },
         actions = { actionIcon.invoke() },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color.White,
+            containerColor = color,
 
             ),
     )
 }
+
+private val borderColor = 0xFFE0E0E0
