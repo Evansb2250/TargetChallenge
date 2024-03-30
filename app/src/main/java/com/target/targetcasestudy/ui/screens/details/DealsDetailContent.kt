@@ -1,5 +1,6 @@
 package com.target.targetcasestudy.ui.screens.details
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.scrollable
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -96,6 +98,7 @@ fun DealsDetailContent(
 }
 
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DealDetailsCard(
     deal: DealDetails,
@@ -103,86 +106,127 @@ fun DealDetailsCard(
 ) {
     val scrollState = rememberScrollState()
 
-        Column(
+
+    Column {
+        LazyColumn(
             modifier = Modifier
+                .weight(12f)
                 .padding(8.dp)
-                .verticalScroll(scrollState)
         ) {
-            Box(
-                modifier = Modifier
-                    .size(328.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(
-                        color = Color.Red,
-                        shape = RoundedCornerShape(8.dp)
+
+            item {
+                Box(
+                    modifier = Modifier
+                        .size(328.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(
+                            color = Color.Red,
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                ) {
+                    AsyncImage(
+                        modifier = Modifier.fillMaxSize(),
+                        model = deal.imageUrl,
+                        contentDescription = "Product image of a ${deal.title} in catalog"
                     )
-            ) {
-                AsyncImage(
-                    modifier = Modifier.fillMaxSize(),
-                    model = deal.imageUrl,
-                    contentDescription = "Product image of a ${deal.title} in catalog"
+                }
+            }
+
+            item {
+                Text(
+                    fontSize = TextUnit(18f, TextUnitType.Sp),
+                    fontFamily = RebotoFontFamily,
+                    fontWeight = FontWeight.Normal,
+                    text = deal.title
                 )
             }
 
-            Text(
-                fontSize = TextUnit(18f, TextUnitType.Sp),
-                fontFamily = RebotoFontFamily,
-                fontWeight = FontWeight.Normal,
-                text = deal.title
-            )
+            item {
+                PriceCard(
+                    regularPrice = deal.regularPrice.displayString,
+                    specialPrice = deal.salePrice?.displayString,
+                    fulfillment = deal.fulfillment,
+                )
+            }
 
-            PriceCard(
-                regularPrice = deal.regularPrice.displayString,
-                specialPrice = deal.salePrice?.displayString,
-                fulfillment = deal.fulfillment,
-            )
+            item {
 
+                Text(
+                    fontSize = TextUnit(18f, TextUnitType.Sp),
+                    fontFamily = RebotoFontFamily,
+                    fontWeight = FontWeight.Normal,
+                    text = deal.title
+                )
+            }
 
-            Spacer(
-                modifier = Modifier
-                    .background(
-                        color = Color(0XFF888888)
-                    )
-                    .height(12.dp)
-                    .fillMaxWidth()
-            )
+            item {
+                PriceCard(
+                    regularPrice = deal.regularPrice.displayString,
+                    specialPrice = deal.salePrice?.displayString,
+                    fulfillment = deal.fulfillment,
+                )
+            }
 
-            Text(
-                fontSize = TextUnit(18f, TextUnitType.Sp),
-                fontFamily = RebotoFontFamily,
-                fontWeight = FontWeight.Bold,
-                text = "Product Details",
-            )
+            item {
+                Spacer(
+                    modifier = Modifier
+                        .background(
+                            color = Color(0XFF888888)
+                        )
+                        .height(12.dp)
+                        .fillMaxWidth()
+                )
 
-            Text(
-                modifier = Modifier
-                    .padding(vertical = 16.dp)
-                    .fillMaxWidth(),
-                fontSize = TextUnit(16f, TextUnitType.Sp),
-                fontFamily = RebotoFontFamily,
-                fontWeight = FontWeight.Normal,
-                text = deal.description,
-                color = Color(0XFF888888)
-            )
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(
-                        primaryColor,
-                        shape = RoundedCornerShape(4.dp)
-                    )
-                ,
-                contentAlignment = Alignment.TopCenter,
-            ) {
-                Button(
-                    colors = ButtonDefaults.buttonColors(containerColor =  primaryColor) ,
-                    onClick = { addToCart(deal) }
-                ) {
-                    Text(
-                        text = "Add to cart")
-                }
+            }
+
+            item {
+                Text(
+                    fontSize = TextUnit(18f, TextUnitType.Sp),
+                    fontFamily = RebotoFontFamily,
+                    fontWeight = FontWeight.Bold,
+                    text = "Product Details",
+                )
+            }
+
+            item{
+                Text(
+                    modifier = Modifier
+                        .padding(vertical = 16.dp)
+                        .fillMaxWidth(),
+                    fontSize = TextUnit(16f, TextUnitType.Sp),
+                    fontFamily = RebotoFontFamily,
+                    fontWeight = FontWeight.Normal,
+                    text = deal.description,
+                    color = Color(0XFF888888)
+                )
             }
         }
+
+
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .padding(all = 16.dp)
+                .fillMaxWidth()
+                .background(
+                    primaryColor,
+                    shape = RoundedCornerShape(4.dp)
+                ),
+            contentAlignment = Alignment.TopCenter,
+        ) {
+            Button(
+                colors = ButtonDefaults.buttonColors(containerColor = primaryColor),
+                onClick = { addToCart(deal) }
+            ) {
+                Text(
+                    text = "Add to cart"
+                )
+            }
+        }
+    }
+
+
+
 }
 
-val primaryColor =  Color(0XFFCC0000)
+val primaryColor = Color(0XFFCC0000)
