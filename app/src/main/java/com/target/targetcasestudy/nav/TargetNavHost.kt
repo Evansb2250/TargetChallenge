@@ -1,7 +1,10 @@
 package com.target.targetcasestudy.nav
 
+import androidx.compose.foundation.background
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -17,6 +20,7 @@ fun TargetNavHost() {
     val navController = rememberNavController()
 
     NavHost(
+        modifier = Modifier.background(color = Color(0xFFCC0000)),
         navController = navController,
         startDestination = Destinations.Login.route
     ) {

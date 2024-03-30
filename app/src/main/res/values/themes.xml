@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.TargetCaseStudy" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.TargetCaseStudy" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    </style>
 </resources>
