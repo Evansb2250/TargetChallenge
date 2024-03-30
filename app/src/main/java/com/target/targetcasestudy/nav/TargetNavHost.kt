@@ -114,7 +114,11 @@ fun TargetNavHost() {
             val userId = it.arguments?.getString(userIdKey) ?: return@composable
             val productId = it.arguments?.getString(productIdKey) ?: return@composable
 
-            DealsDetailScreen(userId = userId, dealId = productId)
+            DealsDetailScreen(
+                userId = userId,
+                dealId = productId,
+                navigateBack = { navController.popBackStack() }
+            )
 
         }
 

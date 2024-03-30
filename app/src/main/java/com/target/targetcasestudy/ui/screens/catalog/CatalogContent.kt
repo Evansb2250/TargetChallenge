@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
@@ -25,6 +26,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
@@ -61,10 +63,8 @@ fun CatalogContent(
             )
         }
     ) { innerPadding ->
-
         when (state) {
             is CatalogScreenStates.Browsing -> {
-
                 if (state.errorState.isError) {
                     ErrorDialog(
                         title = "Failed to connect to server",
@@ -108,14 +108,7 @@ fun DealCard(
     deal: Deal,
     onClick: (dealId: String) -> Unit = {},
 ) {
-    val density = LocalDensity.current
-    var itemHeight by remember {
-        mutableStateOf(0.dp)
-    }
 
-    var itemWidth by remember {
-        mutableStateOf(0.dp)
-    }
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -129,6 +122,7 @@ fun DealCard(
         Box(
             modifier = Modifier
                 .size(140.dp)
+                .clip(RoundedCornerShape(8.dp))
                 .background(
                     color = Color.Red,
                     shape = RoundedCornerShape(8.dp)
