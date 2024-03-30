@@ -11,4 +11,6 @@ sealed class DealScreenStates {
         val deal: DealDetails?,
         val errorState: ErrorState = ErrorState(),
     ) : DealScreenStates()
+
+    object Error: DealScreenStates()
 }

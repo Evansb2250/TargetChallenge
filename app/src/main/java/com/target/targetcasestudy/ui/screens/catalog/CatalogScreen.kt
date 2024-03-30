@@ -20,5 +20,6 @@ fun CatalogScreen(
     CatalogContent(
         state = state,
         navigateToDetailsPage = navigateToDetailsPage,
+        dismissDialog = viewModel::dismissDialog
     )
 }

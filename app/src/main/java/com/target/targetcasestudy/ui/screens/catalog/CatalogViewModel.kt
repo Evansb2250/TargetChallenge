@@ -10,6 +10,7 @@ import com.target.targetcasestudy.interfaces.DispatcherProvider
 import com.target.targetcasestudy.interfaces.ProductRepository
 import com.target.targetcasestudy.ui.screens.cart.domain.CartItem
 import com.target.targetcasestudy.ui.screens.catalog.domain.Deal
+import com.target.targetcasestudy.ui.screens.details.DealScreenStates
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -63,6 +64,13 @@ class CatalogViewModel @Inject constructor(
                     deals = response.data.map { it.toDeal() },
                 )
             }
+        }
+    }
+
+
+    fun dismissDialog() {
+        _state.update {
+            CatalogScreenStates.Error
         }
     }
 }

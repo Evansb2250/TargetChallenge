@@ -7,7 +7,6 @@ import com.target.targetcasestudy.core.domain.ErrorState
 import com.target.targetcasestudy.interfaces.DispatcherProvider
 import com.target.targetcasestudy.interfaces.ProductRepository
 import com.target.targetcasestudy.ui.screens.cart.domain.CartItem
-import com.target.targetcasestudy.ui.screens.catalog.domain.Deal
 import com.target.targetcasestudy.ui.screens.details.domain.DealDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -72,6 +71,12 @@ class DealDetailViewModel @Inject constructor(
             is AsyncResponse.Success -> DealScreenStates.ProductDetails(
                 deal = response.data,
             )
+        }
+    }
+
+    fun dismissDialog() {
+        _state.update {
+            DealScreenStates.Error
         }
     }
 }

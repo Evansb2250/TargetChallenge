@@ -31,5 +31,6 @@ fun DealsDetailScreen(
         navigateBack = navigateBack,
         state = state,
         addToCart = viewModel::addToCart,
+        onDismiss = viewModel::dismissDialog
     )
 }

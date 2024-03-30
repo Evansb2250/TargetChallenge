@@ -29,15 +29,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.ParagraphStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.chooseu.ui.ui_components.dialog.ErrorDialog
 import com.example.chooseu.ui.ui_components.dialog.LoadingDialog
 import com.target.targetcasestudy.R
 import com.target.targetcasestudy.theme.RebotoFontFamily
+import com.target.targetcasestudy.ui.components.generic.ErrorScreen
 import com.target.targetcasestudy.ui.components.toolbar.TargetToolBar
 import com.target.targetcasestudy.ui.screens.catalog.PriceCard
 import com.target.targetcasestudy.ui.screens.details.domain.DealDetails
@@ -47,6 +52,7 @@ fun DealsDetailContent(
     navigateBack: () -> Unit = {},
     state: DealScreenStates,
     addToCart: (deal: DealDetails) -> Unit = {},
+    onDismiss: () -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -85,6 +91,7 @@ fun DealsDetailContent(
                     ErrorDialog(
                         title = "Couldn't Find Deal",
                         error = state.errorState.errorMessage,
+                        onDismiss = onDismiss
                     )
                 } else {
                     DealDetailsCard(
@@ -92,6 +99,10 @@ fun DealsDetailContent(
                         addToCart = addToCart
                     )
                 }
+            }
+
+            DealScreenStates.Error -> {
+                ErrorScreen()
             }
         }
     }
@@ -104,37 +115,31 @@ fun DealDetailsCard(
     deal: DealDetails,
     addToCart: (deal: DealDetails) -> Unit = {},
 ) {
-    val scrollState = rememberScrollState()
-
 
     Column {
         LazyColumn(
             modifier = Modifier
                 .weight(8f)
-                .padding(8.dp)
         ) {
 
             item {
                 Box(
                     modifier = Modifier
-                        .size(328.dp)
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(
-                            color = Color.Red,
-                            shape = RoundedCornerShape(8.dp)
-                        )
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    contentAlignment = Alignment.Center,
                 ) {
                     AsyncImage(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier
+                            .padding(top = 8.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .size(328.dp),
                         model = deal.imageUrl,
                         contentDescription = "Product image of a ${deal.title} in catalog"
                     )
                 }
-            }
-
-            item {
                 Text(
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier.padding(12.dp),
                     fontSize = TextUnit(18f, TextUnitType.Sp),
                     fontFamily = RebotoFontFamily,
                     fontWeight = FontWeight.Normal,
@@ -150,40 +155,53 @@ fun DealDetailsCard(
             }
 
 
+
             item {
                 Spacer(
                     modifier = Modifier
                         .background(
-                            color = Color(0xFFD5CFCF)
+                            color = Color(0xFFF3F3F3)
                         )
-                        .height(12.dp)
+                        .height(16.dp)
                         .fillMaxWidth()
                 )
 
             }
 
             item {
-                Text(
-                    modifier = Modifier.padding(16.dp),
-                    fontSize = TextUnit(18f, TextUnitType.Sp),
-                    fontFamily = RebotoFontFamily,
-                    fontWeight = FontWeight.Bold,
-                    text = "Product Details",
-                )
+                Column(
+                    modifier = Modifier.padding(
+                        horizontal = 12.dp,
+                    )
+                ) {
+
+                    Text(
+                        modifier = Modifier.padding(vertical = 16.dp),
+                        fontSize = TextUnit(18f, TextUnitType.Sp),
+                        fontFamily = RebotoFontFamily,
+                        fontWeight = FontWeight.Bold,
+                        text = "Product Details",
+                    )
+
+
+                    Text(
+                        modifier = Modifier
+                            .padding(vertical = 16.dp)
+                            .fillMaxWidth(),
+                        fontSize = TextUnit(16f, TextUnitType.Sp),
+                        fontFamily = RebotoFontFamily,
+                        fontWeight = FontWeight.Normal,
+                        text = buildAnnotatedString {
+                            withStyle(style = ParagraphStyle(lineHeight = 20.sp)){
+                                append(deal.description)
+                            }
+                        },
+                        color = Color(0XFF888888)
+                    )
+                }
+
             }
 
-            item{
-                Text(
-                    modifier = Modifier
-                        .padding(vertical = 16.dp)
-                        .fillMaxWidth(),
-                    fontSize = TextUnit(16f, TextUnitType.Sp),
-                    fontFamily = RebotoFontFamily,
-                    fontWeight = FontWeight.Normal,
-                    text = deal.description,
-                    color = Color(0XFF888888)
-                )
-            }
         }
 
 
@@ -191,16 +209,16 @@ fun DealDetailsCard(
             modifier = Modifier
                 .weight(1f)
                 .padding(all = 16.dp)
-                .fillMaxWidth()
-                .background(
-                    primaryColor,
-                    shape = RoundedCornerShape(4.dp)
-                ),
+                .fillMaxWidth(),
             contentAlignment = Alignment.TopCenter,
         ) {
             Button(
+                modifier = Modifier
+                    .height(44.dp)
+                    .fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = primaryColor),
-                onClick = { addToCart(deal) }
+                onClick = { addToCart(deal) },
+                shape = RoundedCornerShape(4.dp),
             ) {
                 Text(
                     text = "Add to cart"
@@ -208,7 +226,6 @@ fun DealDetailsCard(
             }
         }
     }
-
 
 
 }

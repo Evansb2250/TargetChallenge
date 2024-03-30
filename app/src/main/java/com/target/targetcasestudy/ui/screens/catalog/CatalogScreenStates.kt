@@ -10,4 +10,6 @@ sealed class CatalogScreenStates {
         val deals: List<Deal>,
         val errorState: ErrorState = ErrorState(),
     ) : CatalogScreenStates()
+
+    object Error: CatalogScreenStates()
 }
