@@ -110,7 +110,7 @@ fun DealDetailsCard(
     Column {
         LazyColumn(
             modifier = Modifier
-                .weight(12f)
+                .weight(8f)
                 .padding(8.dp)
         ) {
 
@@ -134,44 +134,27 @@ fun DealDetailsCard(
 
             item {
                 Text(
+                    modifier = Modifier.padding(16.dp),
                     fontSize = TextUnit(18f, TextUnitType.Sp),
                     fontFamily = RebotoFontFamily,
                     fontWeight = FontWeight.Normal,
                     text = deal.title
                 )
-            }
-
-            item {
                 PriceCard(
+                    modifier = Modifier.padding(vertical = 16.dp),
                     regularPrice = deal.regularPrice.displayString,
                     specialPrice = deal.salePrice?.displayString,
                     fulfillment = deal.fulfillment,
                 )
+
             }
 
-            item {
-
-                Text(
-                    fontSize = TextUnit(18f, TextUnitType.Sp),
-                    fontFamily = RebotoFontFamily,
-                    fontWeight = FontWeight.Normal,
-                    text = deal.title
-                )
-            }
-
-            item {
-                PriceCard(
-                    regularPrice = deal.regularPrice.displayString,
-                    specialPrice = deal.salePrice?.displayString,
-                    fulfillment = deal.fulfillment,
-                )
-            }
 
             item {
                 Spacer(
                     modifier = Modifier
                         .background(
-                            color = Color(0XFF888888)
+                            color = Color(0xFFD5CFCF)
                         )
                         .height(12.dp)
                         .fillMaxWidth()
@@ -181,6 +164,7 @@ fun DealDetailsCard(
 
             item {
                 Text(
+                    modifier = Modifier.padding(16.dp),
                     fontSize = TextUnit(18f, TextUnitType.Sp),
                     fontFamily = RebotoFontFamily,
                     fontWeight = FontWeight.Bold,

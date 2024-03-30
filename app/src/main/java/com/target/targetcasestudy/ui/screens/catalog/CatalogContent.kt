@@ -189,11 +189,14 @@ fun DealCard(
 
 @Composable
 fun PriceCard(
+    modifier: Modifier = Modifier,
     regularPrice: String,
     specialPrice: String?,
     fulfillment: String,
 ) {
-    Column {
+    Column(
+        modifier = modifier,
+    ) {
         Row(
             modifier = Modifier
                 .padding(
