@@ -37,5 +37,4 @@ fun TargetToolBar(
 
             ),
     )
-    HorizontalDivider()
 }

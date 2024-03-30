@@ -1,7 +1,18 @@
 package com.target.targetcasestudy.ui.screens.details
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -9,17 +20,22 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import com.example.chooseu.ui.ui_components.dialog.ErrorDialog
 import com.example.chooseu.ui.ui_components.dialog.LoadingDialog
 import com.target.targetcasestudy.R
 import com.target.targetcasestudy.theme.RebotoFontFamily
 import com.target.targetcasestudy.ui.components.toolbar.TargetToolBar
+import com.target.targetcasestudy.ui.screens.catalog.PriceCard
 import com.target.targetcasestudy.ui.screens.details.domain.DealDetails
 
 @Composable
@@ -61,11 +77,44 @@ fun DealsDetailContent(
             }
 
             is DealScreenStates.ProductDetails -> {
-                Text(text = state.deal!!.description)
-
-                Button(onClick = { addToCart(state.deal) }) {
-                    Text(text = "Add To Cart")
+                if (state.errorState.isError || state.deal == null) {
+                    ErrorDialog(
+                        title = "Couldn't Find Deal",
+                        error = state.errorState.errorMessage,
+                        )
+                } else {
+                    DealDetailsCard(
+                        deal = state.deal,
+                        addToCart = addToCart
+                    )
                 }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun DealDetailsCard(
+    deal: DealDetails,
+    addToCart: (deal: DealDetails) ->
+    Column(
+        modifier = Modifier.verticalScroll(scrollState),
+        horizontalAlignment = Alignment.CenterHo
+                .
+            regularPrice = dea
+
+        Text(
+            text = deal.description
+        )
+
+        Box(
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            Button(
+                onClick = { addToCart(deal) }
+            ) {
+                Text(text = "Add to cart")
             }
         }
     }
