@@ -11,14 +11,17 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface DealsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDealInCart(cartItem: CartItemEntity)
+    suspend fun insertDealInCart(cartItem: CartItemEntity)
 
     @Delete
-    fun removeFromCart(cartItem: CartItemEntity)
+    suspend  fun removeFromCart(cartItem: CartItemEntity)
 
     @Query("SELECT * FROM CartItemEntity WHERE userId=:userId")
     fun retrieveCartItems(userId: Int): Flow<List<CartItemEntity>>
 
+    @Query("SELECT * FROM CartItemEntity WHERE userId=:userId")
+    suspend fun retrieveCartList(userId: Int): List<CartItemEntity>
+
     @Query("DELETE FROM CartItemEntity WHERE userId=:userId")
-    fun deleteCartItemByUserId(userId: Int)
+    suspend fun deleteCartItemsByUserId(userId: Int)
 }

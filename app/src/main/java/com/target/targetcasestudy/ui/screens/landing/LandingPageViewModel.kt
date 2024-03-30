@@ -22,8 +22,8 @@ class LandingPageViewModel @Inject constructor(
     private val productRepository: ProductRepository,
     private val dispatcherProvider: DispatcherProvider,
 ) : ViewModel() {
-    private var _state: MutableStateFlow<LandingScreenStates> =
-        MutableStateFlow(LandingScreenStates.Loading)
+
+    private var _state: MutableStateFlow<LandingScreenStates> = MutableStateFlow(LandingScreenStates.Loading)
     val state = _state.asStateFlow()
 
     fun loadDetails(
@@ -45,8 +45,8 @@ class LandingPageViewModel @Inject constructor(
     fun deleteUser(
         userId: String,
     ) {
-        viewModelScope.launch() {
-            //  productRepository.clearCart(userId)
+        viewModelScope.launch(dispatcherProvider.main) {
+            productRepository.deleteUserCartItems(userId)
             userRepository.deleteUser(userId)
             _state.update {
                 LandingScreenStates.Logout
@@ -62,8 +62,11 @@ class LandingPageViewModel @Inject constructor(
             is AsyncResponse.Failed -> LandingScreenStates.Logout
             is AsyncResponse.Success -> {
                 if (response.data != null) {
-               //     val cartCount = productRepository.getCartCount(response.data.userId.toString())
-                    LandingScreenStates.LoggedIn(response.data.toUser())
+                    val cartCount = productRepository.getCartCount(response.data.userId.toString())
+                    LandingScreenStates.LoggedIn(
+                        currentUser = response.data.toUser(),
+                        cartItems = cartCount
+                    )
                 } else {
                     LandingScreenStates.Logout
                 }

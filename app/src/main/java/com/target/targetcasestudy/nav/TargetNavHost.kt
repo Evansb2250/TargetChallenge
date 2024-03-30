@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.target.targetcasestudy.ui.screens.cart.CartScreen
 import com.target.targetcasestudy.ui.screens.catalog.CatalogScreen
 import com.target.targetcasestudy.ui.screens.details.DealsDetailScreen
 import com.target.targetcasestudy.ui.screens.landing.LandingScreen
@@ -116,7 +117,10 @@ fun TargetNavHost() {
         composable(
             route = Destinations.CartRoute.route,
         ) {
-            Text("Cart")
+            val userId = it.arguments?.getString(userIdKey) ?: return@composable
+            CartScreen(
+                userId = userId
+            )
         }
     }
 }
