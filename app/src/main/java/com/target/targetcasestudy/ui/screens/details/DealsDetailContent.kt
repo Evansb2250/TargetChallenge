@@ -15,6 +15,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -167,19 +168,22 @@ fun DealDetailsCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    Color(0XFFCC0000),
+                    primaryColor,
                     shape = RoundedCornerShape(4.dp)
                     )
                 ,
             contentAlignment = Alignment.BottomCenter,
         ) {
             Button(
+                colors = ButtonDefaults.buttonColors(containerColor =  primaryColor) ,
                 onClick = { addToCart(deal) }
             ) {
-                Text(text = "Add to cart")
+                Text(
+                    text = "Add to cart")
             }
         }
     }
 
 }
 
+val primaryColor =  Color(0XFFCC0000)
