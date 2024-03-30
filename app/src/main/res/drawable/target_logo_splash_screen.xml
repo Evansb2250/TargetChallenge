@@ -7,8 +7,8 @@
         android:scaleY=".4"
         android:scaleX=".4"
         >
-    <path android:fillColor="#F24822" android:pathData="M0,312a328,312 0,1 0,656 0a328,312 0,1 0,-656 0z"/>
+    <path android:fillColor="#CC0000" android:pathData="M0,312a328,312 0,1 0,656 0a328,312 0,1 0,-656 0z"/>
     <path android:fillColor="#fff" android:pathData="M128,312a208,200 0,1 0,416 0a208,200 0,1 0,-416 0z"/>
-    <path android:fillColor="#F24822" android:pathData="M336,320m-96,0a96,96 0,1 1,192 0a96,96 0,1 1,-192 0"/>
+    <path android:fillColor="#CC0000" android:pathData="M336,320m-96,0a96,96 0,1 1,192 0a96,96 0,1 1,-192 0"/>
     </group>
 </vector>

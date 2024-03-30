@@ -95,8 +95,10 @@ fun CartScreenContent(
                     Column {
                         LazyColumn(
                             modifier = Modifier
+                                .fillMaxWidth()
                                 .padding(paddingValues)
-                                .weight(12f)
+                                .weight(12f),
+                            horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             items(
                                 items = state.products
