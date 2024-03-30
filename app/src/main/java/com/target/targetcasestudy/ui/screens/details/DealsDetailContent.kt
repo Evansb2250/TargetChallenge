@@ -123,6 +123,9 @@ fun DealDetailsCard(
         }
 
         Text(
+            fontSize = TextUnit(18f, TextUnitType.Sp),
+            fontFamily = RebotoFontFamily,
+            fontWeight = FontWeight.Normal,
             text = deal.title
         )
 
@@ -142,9 +145,20 @@ fun DealDetailsCard(
                 .fillMaxWidth()
         )
 
-        Text(text = "Product Details")
+        Text(
+            fontSize = TextUnit(18f, TextUnitType.Sp),
+            fontFamily = RebotoFontFamily,
+            fontWeight = FontWeight.Bold,
+            text = "Product Details",
+        )
 
-        Text(text = deal.description)
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            fontSize = TextUnit(16f, TextUnitType.Sp),
+            fontFamily = RebotoFontFamily,
+            fontWeight = FontWeight.Normal,
+            text = deal.description,
+            )
 
         Box(
             modifier = Modifier.fillMaxWidth(),
