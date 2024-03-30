@@ -35,7 +35,8 @@ class CartViewModel @Inject constructor(
         viewModelScope.launch(dispatcherProvider.main) {
             if (::_userId.isInitialized) {
 
-                val response: AsyncResponse<List<CartItem>> = productRepository.getCartItems(_userId)
+                val response: AsyncResponse<List<CartItem>> =
+                    productRepository.getCartItems(_userId)
 
                 _state.update {
                     handleResponse(response)
@@ -85,6 +86,12 @@ class CartViewModel @Inject constructor(
                     cartTotalInPennies = response.data.sumOf { it.quantity * it.price.amountInCents },
                 )
             }
+        }
+    }
+
+    fun onDismissErrorDialog() {
+        _state.update {
+            CartScreenStates.Error
         }
     }
 }

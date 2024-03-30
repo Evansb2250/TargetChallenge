@@ -21,6 +21,7 @@ fun CartScreen(
     CartScreenContent(
         state = viewModel.state.collectAsState().value,
         deleteCartItem = viewModel::deletCartItem,
-        navigateBack = navigateToLandingScreen
+        navigateBack = navigateToLandingScreen,
+        onDismissDialog = viewModel::onDismissErrorDialog
     )
 }
