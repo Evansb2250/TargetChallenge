@@ -49,9 +49,7 @@ fun TargetNavHost() {
         ) {
             SignUpScreen(
                 navigateToLoginScreen = {
-                    navController.navigate(
-                        route = Destinations.Login.route
-                    )
+                    navController.popBackStack()
                 }
             )
         }
@@ -102,6 +100,9 @@ fun TargetNavHost() {
                             dealId,
                         )
                     )
+                },
+                navigateBackToLanding = {
+                    navController.popBackStack()
                 }
             )
         }

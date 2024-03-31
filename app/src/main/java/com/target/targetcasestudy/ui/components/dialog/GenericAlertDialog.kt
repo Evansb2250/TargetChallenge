@@ -4,6 +4,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
 @Preview(
@@ -24,6 +25,7 @@ fun GenericAlertDialog(
         icon = icon,
         title = title,
         text = text,
+        containerColor = Color.White,
         tonalElevation = AlertDialogDefaults.TonalElevation,
     )
 }
