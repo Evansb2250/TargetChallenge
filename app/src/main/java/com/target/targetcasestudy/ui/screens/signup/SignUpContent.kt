@@ -1,5 +1,6 @@
 package com.target.targetcasestudy.ui.screens.signup
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -7,14 +8,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -27,6 +29,7 @@ import com.example.chooseu.ui.ui_components.dialog.LoadingDialog
 import com.target.targetcasestudy.R
 import com.target.targetcasestudy.core.targetLogoDescription
 import com.target.targetcasestudy.theme.RebotoFontFamily
+import com.target.targetcasestudy.theme.dpValue120
 import com.target.targetcasestudy.theme.dpValue18
 import com.target.targetcasestudy.theme.primaryColor
 import com.target.targetcasestudy.ui.components.textfields.CustomTextField
@@ -45,7 +48,7 @@ fun SigUpContent(
     retry: () -> Unit = {},
     navigateToLoginScreen: () -> Unit = {},
 ) {
-
+    val context = LocalContext.current
     when (state) {
         SignUpStates.Loading -> {
             LoadingDialog()
@@ -73,11 +76,10 @@ fun SigUpContent(
                     verticalArrangement = Arrangement.Top
                 ) {
 
-
                     Image(
                         modifier = Modifier
                             .padding(dpValue18)
-                            .size(120.dp),
+                            .size(dpValue120),
                         painter = painterResource(
                             id = R.drawable.target_logo_32
                         ),
@@ -103,60 +105,53 @@ fun SigUpContent(
 
                         CustomTextField(
                             value = state.userName,
-                            onValueChange = { text ->
-                                state.userName = text
-                            },
+                            label = { Text(text = "Username") },
+                            onValueChange = state::userName::set,
                         )
 
                         PasswordTextField(
                             value = state.password,
                             label = { Text(text = "Password") },
-                            onValueChange = { text ->
-                                state.password = text
-                            },
+                            onValueChange = state::password::set,
                             hidePassword = state.hidePassword,
-                            onPasswordVisibilityChange = {
-                                state.hidePassword = it
-                            }
+                            onPasswordVisibilityChange = state::hidePassword::set
                         )
-
 
                         PasswordTextField(
                             value = state.passwordConfirmation,
                             label = { Text(text = "Password Confirmation") },
-                            onValueChange = { text ->
-                                state.passwordConfirmation = text
-                            },
+                            onValueChange = state::passwordConfirmation::set,
                             hidePassword = state.hidePasswordConfirm,
-                            onPasswordVisibilityChange = {
-                                state.hidePasswordConfirm = it
-                            }
+                            onPasswordVisibilityChange = state::hidePasswordConfirm::set
                         )
-                        if (!state.password.isEmpty() &&
-                            !state.passwordConfirmation.isEmpty() &&
-                            !state.password.equals(state.passwordConfirmation)
-                        ) {
+
+                        if (state.containsInvalidPasswords()) {
                             Text(
                                 color = Color.Red,
                                 text = "Password must match",
                             )
                         }
 
-                        Button(
-                            enabled = state.readyToRegister(),
+                        OutlinedButton(
                             onClick = {
-                                signUp(state.userName, state.password)
+                                if(!state.readyToRegister()){
+                                    Toast.makeText(context, "Please fill out everything", Toast.LENGTH_SHORT).show()
+                                }else{
+                                    signUp(state.userName, state.password)
+                                }
                             }
                         ) {
                             Text(
-                                text = "SIGN IN",
+                                color = primaryColor,
+                                text = "Register",
                             )
                         }
 
-                        Button(
+                        OutlinedButton(
                             onClick = navigateToLoginScreen,
                         ) {
                             Text(
+                                color = primaryColor,
                                 text = "Cancel",
                             )
                         }

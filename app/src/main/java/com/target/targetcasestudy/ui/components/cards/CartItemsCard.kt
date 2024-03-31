@@ -61,7 +61,7 @@ fun CartItemsCard(
 
     LaunchedEffect(key1 = showToastMessage) {
         if (showToastMessage) {
-            Toast.makeText(context, "Item deleted from to Cart !!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Item deleted from to Cart", Toast.LENGTH_SHORT).show()
             showToastMessage = false
         }
     }

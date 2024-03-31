@@ -75,6 +75,7 @@ dependencies {
     //Datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 
     // Compose Navigation
     def nav_version = "2.7.7"

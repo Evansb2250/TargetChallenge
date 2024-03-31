@@ -9,7 +9,10 @@ sealed class CartScreenStates() {
         val products: List<CartItem>,
         val cartTotalInPennies: Int,
         val errorState: ErrorState = ErrorState()
-    ) : CartScreenStates()
+    ) : CartScreenStates(){
+        val itemQuantity : Int = products.sumOf { it.quantity }
+        val displayPrice : String = "$ ${cartTotalInPennies.toDouble() / 100}"
+    }
 
     object Error: CartScreenStates()
 }

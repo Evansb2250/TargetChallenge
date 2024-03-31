@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.target.targetcasestudy.core.AsyncResponse
 import com.target.targetcasestudy.core.domain.ErrorState
+import com.target.targetcasestudy.interfaces.DispatcherProvider
 import com.target.targetcasestudy.interfaces.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val userRepository: UserRepository,
+    private val dispatcherProvider: DispatcherProvider,
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<SignUpStates> =
@@ -26,7 +28,7 @@ class SignUpViewModel @Inject constructor(
         userName: String,
         password: String,
     ) {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcherProvider.main) {
             val response = userRepository.createUser(userName, password)
             _state.value = handleUserRegistrationResponse(response)
         }

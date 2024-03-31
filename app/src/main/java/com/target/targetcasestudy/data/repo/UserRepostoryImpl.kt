@@ -12,8 +12,6 @@ import com.target.targetcasestudy.data.room.dao.UserDao
 import com.target.targetcasestudy.data.room.models.UserEntity
 import com.target.targetcasestudy.interfaces.DispatcherProvider
 import com.target.targetcasestudy.interfaces.UserRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
 
@@ -31,22 +29,28 @@ class UserRepostoryImpl @Inject constructor(
         return withContext(dispatcherProvider.io) {
             try {
                 val potentialUser = userDao.retrieveUser(userName, password)
-                if (potentialUser != null) {
-
-                    storeCurrentUserId(potentialUser.userId)
-                    AsyncResponse.Success(data = potentialUser)
-                } else {
-                    val errorMessage =
-                        if (userDao.userExist(userName) != null) "Wrong Credentials" else nonExistentUserError
-                    AsyncResponse.Failed(
-                        message = errorMessage
-                    )
-                }
+                verifyRealUser(potentialUser,userName)
             } catch (e: Exception) {
                 AsyncResponse.Failed(
                     message = e.message ?: serverErrorMessage
                 )
             }
+        }
+    }
+
+    private suspend fun verifyRealUser(
+        poentialUser: UserEntity?,
+        userName: String
+    ): AsyncResponse<UserEntity?> {
+        return if (poentialUser != null) {
+            storeCurrentUserId(poentialUser.userId)
+            AsyncResponse.Success(data = poentialUser)
+        } else {
+            val errorMessage =
+                if (userDao.userExist(userName) != null) "Wrong Credentials" else nonExistentUserError
+            AsyncResponse.Failed(
+                message = errorMessage
+            )
         }
     }
 

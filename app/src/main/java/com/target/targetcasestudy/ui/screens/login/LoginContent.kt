@@ -27,6 +27,7 @@ import com.example.chooseu.ui.ui_components.dialog.LoadingDialog
 import com.target.targetcasestudy.R
 import com.target.targetcasestudy.core.targetLogoDescription
 import com.target.targetcasestudy.theme.RebotoFontFamily
+import com.target.targetcasestudy.theme.dpValue120
 import com.target.targetcasestudy.theme.dpValue18
 import com.target.targetcasestudy.theme.primaryColor
 import com.target.targetcasestudy.ui.components.textfields.CustomTextField
@@ -62,7 +63,7 @@ fun LoginContent(
                     Image(
                         modifier = Modifier
                             .padding(dpValue18)
-                            .size(120.dp),
+                            .size(dpValue120),
                         painter = painterResource(
                             id = R.drawable.target_logo_32
                         ),
@@ -89,20 +90,14 @@ fun LoginContent(
                         CustomTextField(
                             value = state.userName,
                             label = { Text(text = "Username") },
-                            onValueChange = { text ->
-                                state.userName = text
-                            }
+                            onValueChange = state::userName::set
                         )
                         PasswordTextField(
                             value = state.password,
                             label = { Text(text = "Password") },
                             hidePassword = state.hidePassword,
-                            onValueChange = { text ->
-                                state.password = text
-                            },
-                            onPasswordVisibilityChange = { it ->
-                                state.hidePassword = it
-                            }
+                            onValueChange = state::password::set,
+                            onPasswordVisibilityChange = state::hidePassword::set,
                         )
 
 

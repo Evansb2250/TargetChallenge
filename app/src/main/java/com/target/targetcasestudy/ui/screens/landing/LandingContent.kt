@@ -50,8 +50,8 @@ fun LandingContent(
                                 fontFamily = RebotoFontFamily ,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = TextUnit(24f, TextUnitType.Sp),
-                                color = Color.White,
-                                text = "Welcome ${state.currentUser.userName} !!"
+                                color = primaryColor,
+                                text = "Welcome ${state.currentUser.userName}"
                             )
                         },
                         actionIcon = {
@@ -61,7 +61,7 @@ fun LandingContent(
                                 navigateToCart(state.currentUser.userId)
                             }
                         },
-                        color = primaryColor
+                     //   color = primaryColor
                     )
                 }
             ) { paddingValues ->

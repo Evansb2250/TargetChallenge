@@ -75,7 +75,7 @@ class ProductRepositoryImp @Inject constructor(
         }
     }
 
-    //Increments the quantity account if the item already exist
+    //Increments the quantity if the item already exist
     private suspend fun updateExistingCartItem(cartItem: CartItem): CartItem {
         val existingItems = dealsDao.retrieveCartList(cartItem.userId.toInt())
             .firstOrNull { it.dealId == cartItem.dealId.toInt() }
