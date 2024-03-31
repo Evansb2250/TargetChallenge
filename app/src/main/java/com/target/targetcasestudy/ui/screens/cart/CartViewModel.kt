@@ -20,10 +20,8 @@ class CartViewModel @Inject constructor(
     private val dispatcherProvider: DispatcherProvider,
 ) : ViewModel() {
 
-    private val _state: MutableStateFlow<CartScreenStates> =
-        MutableStateFlow(CartScreenStates.Loading)
+    private val _state: MutableStateFlow<CartScreenStates> = MutableStateFlow(CartScreenStates.Loading)
     val state = _state.asStateFlow()
-
 
     private lateinit var _userId: String
 
@@ -61,7 +59,9 @@ class CartViewModel @Inject constructor(
     fun deletCartItem(cartItem: CartItem) {
         viewModelScope.launch {
             when (productRepository.deleteCartItem(cartItem)) {
-                is AsyncResponse.Failed -> TODO()
+                is AsyncResponse.Failed -> {
+                    //Do Nothing
+                }
                 is AsyncResponse.Success -> {
                     _state.update {
                         handleResponse(productRepository.getCartItems(_userId))

@@ -26,6 +26,7 @@ import com.example.chooseu.ui.ui_components.dialog.ErrorDialog
 import com.example.chooseu.ui.ui_components.dialog.LoadingDialog
 import com.target.targetcasestudy.R
 import com.target.targetcasestudy.theme.RebotoFontFamily
+import com.target.targetcasestudy.theme.dpValue12
 import com.target.targetcasestudy.theme.dpValue4
 import com.target.targetcasestudy.theme.dpValue8
 import com.target.targetcasestudy.ui.components.cards.CartItemsCard
@@ -95,7 +96,7 @@ fun CartScreenContent(
                         Text(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .border( width =  1.dp, shape = RoundedCornerShape(12.dp), color = Color.Black)
+                                .border( width =  1.dp, shape = RoundedCornerShape(dpValue12), color = Color.Black)
                                 .padding(dpValue8)
                                 .weight(2f),
                             fontSize = TextUnit(23f, TextUnitType.Sp),

@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 
+private const val borderColor = 0xFFE0E0E0
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TargetToolBar(
@@ -38,9 +39,6 @@ fun TargetToolBar(
         actions = { actionIcon.invoke() },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = color,
-
             ),
     )
 }
-
-private val borderColor = 0xFFE0E0E0

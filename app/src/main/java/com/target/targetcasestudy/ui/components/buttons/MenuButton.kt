@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.target.targetcasestudy.theme.RebotoFontFamily
 import com.target.targetcasestudy.theme.dpValue12
+import com.target.targetcasestudy.theme.dpValue140
 import com.target.targetcasestudy.theme.dpValue4
 
 
@@ -25,7 +26,7 @@ fun MenuButton(
 ) {
     OutlinedButton(
         modifier = Modifier
-            .height(140.dp)
+            .height(dpValue140)
             .fillMaxWidth()
             .padding(dpValue12),
         onClick = onClick,

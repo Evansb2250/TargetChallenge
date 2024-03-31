@@ -29,6 +29,7 @@ import com.target.targetcasestudy.core.targetLogoDescription
 import com.target.targetcasestudy.theme.RebotoFontFamily
 import com.target.targetcasestudy.theme.dpValue120
 import com.target.targetcasestudy.theme.dpValue18
+import com.target.targetcasestudy.theme.dpValue20
 import com.target.targetcasestudy.theme.primaryColor
 import com.target.targetcasestudy.ui.components.textfields.CustomTextField
 import com.target.targetcasestudy.ui.components.textfields.PasswordTextField
@@ -81,10 +82,10 @@ fun LoginContent(
 
                     Column(
                         modifier = Modifier.padding(
-                            top = 20.dp,
+                            top = dpValue20,
                         ),
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(20.dp)
+                        verticalArrangement = Arrangement.spacedBy(dpValue20)
                     ) {
 
                         CustomTextField(

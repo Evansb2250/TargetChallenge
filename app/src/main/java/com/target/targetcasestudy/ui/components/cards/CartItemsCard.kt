@@ -37,7 +37,10 @@ import coil.compose.AsyncImage
 import com.target.targetcasestudy.R
 import com.target.targetcasestudy.theme.RebotoFontFamily
 import com.target.targetcasestudy.theme.dpValue12
+import com.target.targetcasestudy.theme.dpValue140
+import com.target.targetcasestudy.theme.dpValue141
 import com.target.targetcasestudy.theme.dpValue16
+import com.target.targetcasestudy.theme.dpValue172
 import com.target.targetcasestudy.theme.dpValue4
 import com.target.targetcasestudy.theme.dpValue8
 import com.target.targetcasestudy.theme.primaryColor
@@ -95,7 +98,7 @@ fun CartItemsCard(
             Box(
                 modifier = Modifier
                     .padding(dpValue4)
-                    .size(140.dp)
+                    .size(dpValue140)
                     .clip(RoundedCornerShape(dpValue8))
                     .background(
                         color = Color.Gray,
@@ -111,7 +114,8 @@ fun CartItemsCard(
                 modifier = Modifier
                     .background(color = cardColor)
                     .size(
-                        width = 172.dp, 141.dp
+                        width = dpValue172,
+                        height = dpValue141,
                     )
             ) {
                 Text(
