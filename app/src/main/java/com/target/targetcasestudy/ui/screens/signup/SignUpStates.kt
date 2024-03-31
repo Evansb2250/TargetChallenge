@@ -15,7 +15,8 @@ sealed class SignUpStates {
         var userName by  mutableStateOf(initialUserName)
         var password by mutableStateOf(initialPassword)
         var passwordConfirmation by mutableStateOf(initialPassword)
-
+        var hidePassword by mutableStateOf(true)
+        var hidePasswordConfirm by mutableStateOf(true)
 
         fun readyToRegister():Boolean{
             return try {

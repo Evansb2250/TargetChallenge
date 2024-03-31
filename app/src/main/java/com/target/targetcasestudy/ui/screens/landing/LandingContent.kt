@@ -79,7 +79,7 @@ fun LandingContent(
                     )
 
                     MenuButton(
-                        text = "logout" ,
+                        text = "Logout" ,
                         onClick = logout
                         )
 

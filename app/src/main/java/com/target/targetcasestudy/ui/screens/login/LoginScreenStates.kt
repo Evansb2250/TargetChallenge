@@ -14,6 +14,8 @@ sealed class LoginScreenStates {
     ): LoginScreenStates(){
         var userName by  mutableStateOf(initialUserName)
         var password by mutableStateOf(initialPassword)
+        var hidePassword by mutableStateOf(true)
+
     }
 
     data class Login(
