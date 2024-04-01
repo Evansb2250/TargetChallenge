@@ -17,9 +17,6 @@ interface DealsDao {
     suspend  fun removeFromCart(cartItem: CartItemEntity)
 
     @Query("SELECT * FROM CartItemEntity WHERE userId=:userId")
-    fun retrieveCartItems(userId: Int): Flow<List<CartItemEntity>>
-
-    @Query("SELECT * FROM CartItemEntity WHERE userId=:userId")
     suspend fun retrieveCartList(userId: Int): List<CartItemEntity>
 
     @Query("DELETE FROM CartItemEntity WHERE userId=:userId")
