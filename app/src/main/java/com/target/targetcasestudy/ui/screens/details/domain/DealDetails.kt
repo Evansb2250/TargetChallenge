@@ -11,3 +11,13 @@ data class DealDetails(
     val salePrice: Price? = null,
     val regularPrice: Price,
 )
+
+val dummyDealDetails = DealDetails(
+    id = 1,
+    title = "Dummy Deal",
+    imageUrl = "https://example.com/image.jpg",
+    description = "This is a dummy deal description.",
+    fulfillment = "Online",
+    salePrice = Price(999, "$", "$9.99"),
+    regularPrice = Price(1299, "$","$12.99")
+)

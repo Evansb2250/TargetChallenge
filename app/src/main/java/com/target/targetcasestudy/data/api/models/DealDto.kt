@@ -34,6 +34,19 @@ val default = Price(
 )
 
 
+val dummyDealDto = DealDto(
+    id = "123456",
+    title = "Dummy Deal",
+    aisle = "Aisle 1",
+    description = "This is a dummy deal",
+    imageUrl = "https://example.com/image.jpg",
+    availability = "In stock",
+    fulfillment = "Online",
+    regularPrice = Price(999, "$", "$9.99"),
+    salePrice = Price(799, "$", "$7.99")
+)
+
+
 fun DealDto.toDealDetail(): DealDetails = DealDetails(
     id = this.id.toInt(),
     title = this.title,

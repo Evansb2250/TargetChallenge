@@ -19,8 +19,9 @@ fun DealsDetailScreen(
     }
 
     LaunchedEffect(key1 = Unit) {
+        viewModel.setUserId(userId = userId)
+
         viewModel.loadProductDetails(
-            userId = userId,
             productId = dealId,
         )
     }

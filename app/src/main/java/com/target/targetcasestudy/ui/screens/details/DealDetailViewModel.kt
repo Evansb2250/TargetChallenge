@@ -27,12 +27,14 @@ class DealDetailViewModel @Inject constructor(
 
     private lateinit var _userId: String
 
+    fun setUserId(userId: String){
+        _userId = userId
+    }
+
     fun loadProductDetails(
-        userId: String,
         productId: String,
     ) {
         viewModelScope.launch(dispatcherProvider.main) {
-            _userId = userId
             val response = productRepository.fetchProductDetails(productId)
             _state.update {
                 handleFetchResponse(response = response)

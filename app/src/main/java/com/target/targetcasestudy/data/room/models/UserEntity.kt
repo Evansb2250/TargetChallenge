@@ -14,9 +14,14 @@ class UserEntity(
     val password: String,
 )
 
+val dummyUserEntity = UserEntity(
+    userId = 0,
+    userName = "entity",
+    password = "password",
+)
 
 fun UserEntity.toUser(): User = User(
     userId = this.userId.toString(),
     userName = this.userName,
-    password =  this.password,
+    password = this.password,
 )

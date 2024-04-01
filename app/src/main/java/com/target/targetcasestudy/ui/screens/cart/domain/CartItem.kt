@@ -13,6 +13,19 @@ data class CartItem(
     val price: Price,
 )
 
+val dummyCartItem = CartItem(
+    userId = "user123",
+    dealId = "deal456",
+    quantity = 2,
+    title = "Dummy Product",
+    imageUrl = "https://example.com/product.jpg",
+    fulfillment = "Online",
+    price = Price(
+        amountInCents = 999,
+        currencySymbol = "$",
+        displayString = "$9.99"
+    )
+)
 
 fun CartItem.toCartItemEntity(): CartItemEntity = CartItemEntity(
     userId = this.userId.toInt(),

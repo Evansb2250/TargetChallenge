@@ -29,15 +29,19 @@ class LoginViewModel @Inject constructor(
     fun loadCredentials() {
         viewModelScope.launch(dispatcherProvider.main) {
             val potentialCurrentUserId = userRepository.getCurrentUserId()
-            when (potentialCurrentUserId) {
+            val updatedState = when (potentialCurrentUserId) {
                 //Do Nothing
-                is AsyncResponse.Failed -> {}
+                is AsyncResponse.Failed -> {
+                    LoginScreenStates.InProgress()
+                }
+
                 is AsyncResponse.Success -> {
                     //skips login screen if user never logged out
-                    _state.update {
                         handleLoginResponse(potentialCurrentUserId)
-                    }
                 }
+            }
+            _state.update {
+                updatedState
             }
         }
     }
